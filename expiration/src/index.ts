@@ -2,6 +2,8 @@ import { natsWrapper } from './nats-wrapper';
 import { OrderCreatedListner } from './events/listners/order-created-listner';
 
 const start = async () => {
+	console.log('starting ....');
+
 	if (!process.env.NATS_CLIENT_ID) {
 		throw new Error('NATS_CLIENT_ID must be defined');
 	}
