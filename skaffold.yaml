@@ -1,0 +1,58 @@
+apiVersion: skaffold/v2alpha3
+kind: Config
+deploy:
+    kubectl:
+        manifests:
+            - ./infra/k8s/*
+build:
+    local:
+        push: false
+    artifacts:
+        - image: yeapkrush/ex6_auth
+          context: auth
+          docker:
+            dockerfile: Dockerfile
+          sync:
+            manual:
+               - src: 'src/**/*.ts'
+                 dest: . 
+        - image: yeapkrush/ex6_client
+          context: client
+          docker:
+            dockerfile: Dockerfile
+          sync:
+            manual:
+               - src: '**/*.js'
+                 dest: . 
+        - image: yeapkrush/ex6_tickets
+          context: tickets
+          docker:
+            dockerfile: Dockerfile
+          sync:
+            manual:
+               - src: 'src/**/*.ts'
+                 dest: . 
+        - image: yeapkrush/ex6_orders
+          context: orders
+          docker:
+            dockerfile: Dockerfile
+          sync:
+            manual:
+               - src: 'src/**/*.ts'
+                 dest: .        
+        - image: yeapkrush/ex6_expiration
+          context: expiration
+          docker:
+            dockerfile: Dockerfile
+          sync:
+            manual:
+               - src: 'src/**/*.ts'
+                 dest: .     
+        - image: yeapkrush/ex6_payments
+          context: payments
+          docker:
+            dockerfile: Dockerfile
+          sync:
+            manual:
+               - src: 'src/**/*.ts'
+                 dest: .          
